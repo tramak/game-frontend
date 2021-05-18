@@ -1,0 +1,31 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:jsx-a11y/recommended"
+    ],
+    "rules": {
+        "react/jsx-indent": [
+            2,
+            2
+        ],
+        "react/jsx-indent-props": [
+            "error",
+            2
+        ],
+        "@typescript-eslint/indent": [
+            "error",
+            2
+        ],
+        "object-curly-spacing": [ "error", "always" ],
+        "array-bracket-spacing": [ "error", "always" ],
+        "react/prop-types": "off",
+        "quotes": ["error", "single"],
+        "jsx-a11y/click-events-have-key-events": "off"
+    }
+}
