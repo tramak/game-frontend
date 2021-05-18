@@ -1,25 +1,15 @@
 import React from 'react';
-import { RootState } from '../redux/store';
-import * as actions from '../redux/actions';
-import { connect, ConnectedProps } from 'react-redux';
+import { useAppSelector, useActions } from '../redux/hooks';
 
-const mapState = (state: RootState) => ({
-  p: state.auth.p
-});
+const Test: React.FC = () => {
+  const p = useAppSelector(state => state.auth.p);
+  const { setAccountData } = useActions();
 
-const mapDispatch = {
-  setAccountData: actions.setAccountData
-}
-
-const connector = connect(mapState, mapDispatch);
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-const Test: React.FC<PropsFromRedux> = ({ p, setAccountData }) => {
   return (
     <div onClick={() => setAccountData('p')}>
-      test {p} 3
+      test {p} 334
     </div>
   );
 };
 
-export default connector(Test);
+export default Test;
