@@ -12,6 +12,8 @@
     "rules": {
         "react/jsx-indent": [2, 2],
         "react/jsx-indent-props": ["error", 2],
+        "react/no-unescaped-entities": "off",
+        "jsx-a11y/no-autofocus": "off",
         "@typescript-eslint/indent": ["error", 2],
         "object-curly-spacing": [ "error", "always" ],
         "array-bracket-spacing": [ "error", "always" ],
