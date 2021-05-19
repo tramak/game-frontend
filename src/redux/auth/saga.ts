@@ -1,10 +1,21 @@
-import { takeEvery } from 'redux-saga/effects';
+import { takeLatest, call } from 'redux-saga/effects';
 import * as actions from '../actions';
+import * as I from './interfaces';
+import * as api from '../api';
+import { AxiosResponse } from 'axios';
 
-function* setAccountData(action: any) {
+function* fetchSingIn(action: I.IFetchSingInAction) {
+  const { payload } = action;
   console.log({ action });
+
+  try {
+    const response: AxiosResponse<I.ISingInFormResponse> = yield call(api.fetchSingIn, payload);
+    console.log({ response });
+  } catch (e) {
+
+  }
 }
 
 export default function* () {
-  yield takeEvery(actions.setAccountData, setAccountData);
+  yield takeLatest(actions.fetchSingIn, fetchSingIn);
 }

@@ -7,7 +7,7 @@ const headers = {
   'Content-Type': 'application/json;charset=utf-8'
 };
 
-export default {
+const agent = {
   POST<T, R = any>(path: string, data?: T) {
     return axios.post(`${path}`, data, { timeout, headers }) as Promise<AxiosResponse<R>>;
   },
@@ -34,3 +34,5 @@ export default {
     }) as Promise<AxiosResponse<R>>;
   }
 };
+
+export default agent;
