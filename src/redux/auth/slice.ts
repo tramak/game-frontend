@@ -1,24 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface IState {
-  p: number;
+  token?: {
+    access: string;
+  };
 }
 const initialState: IState = {
-  p: 0
 };
 
 const slice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setAccountData(state, action) {
-      state.p++;
+    setToken(state, action) {
+      const { jwtToken } = action.payload;
+      state.token = {
+        access: jwtToken
+      }
+    },
+    clearToken(state) {
+      delete state.token;
     }
   }
 });
 
 export const {
-  setAccountData
+  setToken,
+  clearToken
 } = slice.actions;
 
 export default slice.reducer;

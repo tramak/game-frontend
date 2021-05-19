@@ -12,7 +12,7 @@ import { ISingInFormValues } from '../../redux/auth/interfaces';
 import { useActions } from '../../redux/hooks';
 import { useStyles } from './SingIn.styles';
 
-export default function SignIn() {
+const SignIn = () => {
   const classes = useStyles();
   const { fetchSingIn } = useActions();
 
@@ -69,3 +69,5 @@ export default function SignIn() {
     </Container>
   );
 }
+
+export default SignIn;
