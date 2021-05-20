@@ -12,6 +12,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import UsersIcon from '@material-ui/icons/PeopleAlt';
 import BusinessIcon from '@material-ui/icons/Business';
+import { useHistory } from 'react-router';
 
 const drawerWidth = 240;
 
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MainLayout: React.FC = ({ children }) => {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <div className={classes.root}>
@@ -63,11 +65,11 @@ const MainLayout: React.FC = ({ children }) => {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            <ListItem button>
+            <ListItem button onClick={() => history.push('/companies')}>
               <ListItemIcon><BusinessIcon /></ListItemIcon>
               <ListItemText primary="Компании" />
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={() => history.push('/users')}>
               <ListItemIcon><UsersIcon /></ListItemIcon>
               <ListItemText primary="Сотрудники" />
             </ListItem>

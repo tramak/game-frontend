@@ -1,13 +1,10 @@
 import React from 'react';
-import { Redirect, Route, RouteComponentProps, Router, Switch } from 'react-router';
+import { Redirect, Route, RouteComponentProps, Router, Switch } from 'react-router-dom';
 import { history } from './redux/history';
-import SingIn from './pages/singIn/SingIn';
-import logo from './logo.svg';
-import './App.css';
 import { routes } from './router/routes';
-import Error from './pages/error/Error';
 import { useAppSelector } from './redux/hooks';
 import * as pages from './pages';
+import './App.css';
 
 const App: React.FC = () => {
   const token = useAppSelector(state => state.auth.token);
@@ -32,7 +29,6 @@ const App: React.FC = () => {
           return (
             <Route
               key={route.path}
-              exact={route.exact}
               path={route.path}
               component={RouteComponent}
             />
