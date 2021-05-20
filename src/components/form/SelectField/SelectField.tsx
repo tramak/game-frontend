@@ -21,28 +21,25 @@ const SelectField: React.FC<IProps & FieldProps> = (
   const classes = useStyles();
   const labelId = `select-label-${name}`;
 
-  const handlerChange = (e: React.ChangeEvent<{ value: unknown }>) => {
-    console.log({ value: e.target.value });
+  const handleChange = (e: React.ChangeEvent<{ value: unknown }>) => {
     form.setFieldValue(name, e.target.value);
   }
 
   return (
     <FormControl className={classes.formControl}>
-      <InputLabel id={labelId}>{label}</InputLabel>
+      <InputLabel htmlFor="age-native-simple">Age</InputLabel>
       <Select
-        name={name}
-        autoFocus={autoFocus}
-        labelId={labelId}
-        fullWidth
-        id={name}
-        value={field.value || ''}
-        onChange={handlerChange}
+        native
+        value={field.value}
+        onChange={handleChange}
+        inputProps={{
+          name: 'age',
+          id: 'age-native-simple',
+        }}
       >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
+        <option aria-label="None" value="" />
         {(data || []).map(item => (
-          <MenuItem key={item.value} value={item.value.toString()}>{item.label}</MenuItem>
+          <option key={item.value} value={item.value.toString()}>{item.label}</option>
         ))}
       </Select>
     </FormControl>

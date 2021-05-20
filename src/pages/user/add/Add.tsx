@@ -60,14 +60,14 @@ const UserAddPage = () => {
                 component={InputTextField}
               />
             </Grid>
-            {/*<Grid item xs={12}>*/}
-            {/*  <Field*/}
-            {/*    name="company"*/}
-            {/*    label="Компания"*/}
-            {/*    data={data}*/}
-            {/*    component={SelectField}*/}
-            {/*  />*/}
-            {/*</Grid>*/}
+            <Grid item xs={12}>
+              <Field
+                name="company"
+                label="Компания"
+                data={data}
+                component={SelectField}
+              />
+            </Grid>
             <Grid item xs={12}>
               <Field
                 required
