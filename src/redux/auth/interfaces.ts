@@ -2,6 +2,12 @@ import * as CONST from './constants';
 import { IResponse } from '../../intefaces';
 import { FC } from 'react';
 
+export interface IAuthState {
+  token?: {
+    access: string;
+  };
+}
+
 export interface ISingInFormValues {
   email: string;
   password: string;

@@ -1,7 +1,8 @@
 import { all, fork } from 'redux-saga/effects';
 import auth from './auth/saga';
+import company from './company/saga';
 
-const registeredSaga: Array<() => void> = [ auth ];
+const registeredSaga: Array<() => void> = [ auth, company ];
 
 export default function* rootSaga() {
   const forkedSaga = registeredSaga.map(saga => fork(saga));

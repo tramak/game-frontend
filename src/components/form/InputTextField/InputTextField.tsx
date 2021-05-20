@@ -1,31 +1,33 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { FieldProps } from 'formik';
+import { FieldProps, FieldRenderProps } from 'react-final-form';
 
 interface IProps {
   name: string;
   label: string;
   type?: string;
+  variant?: 'standard' | 'filled' | 'outlined' | undefined;
   required: boolean;
   autoFocus: boolean
 }
 
-const InputTextField: React.FC<IProps & FieldProps> = (
+const InputTextField: React.FC<FieldRenderProps<IProps>> = (
   {
     name,
     label,
     required,
     autoFocus,
     field,
+    variant,
     type = 'text'
   }
 ) => {
   return (
     <TextField
       {...field}
-      variant="outlined"
       margin="normal"
       required={required}
+      variant={variant}
       fullWidth
       id={name}
       label={label}

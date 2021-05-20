@@ -36,6 +36,7 @@ const SignIn = () => {
               required
               label="Электронная почта"
               name="email"
+              variant="outlined"
               autoFocus
               component={InputTextField}
             />
@@ -44,6 +45,7 @@ const SignIn = () => {
               label="Пароль"
               name="password"
               type="password"
+              variant="outlined"
               autoFocus
               component={InputTextField}
             />

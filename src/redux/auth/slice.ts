@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { IAuthState } from './interfaces';
 
-interface IState {
-  token?: {
-    access: string;
-  };
-}
-const initialState: IState = {
-};
+const initialState: IAuthState = {};
 
 const slice = createSlice({
   name: 'auth',

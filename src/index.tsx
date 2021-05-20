@@ -9,7 +9,6 @@ import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    sdf
     <Provider store={store}>
       <App />
     </Provider>
