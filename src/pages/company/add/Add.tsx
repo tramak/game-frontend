@@ -2,9 +2,9 @@ import React from 'react';
 import { Formik, Field, Form } from 'formik';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { Box, Paper } from '@material-ui/core';
+import { Box, InputLabel, Paper, TextareaAutosize } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import useStyles from './Add.styles';
+import useStyles from '../../user/add/Add.styles';
 import InputTextField from '../../../components/form/InputTextField/InputTextField';
 import SelectField from '../../../components/form/SelectField/SelectField';
 import { IAddUserFormValues } from '../../../redux/user/interfaces';
@@ -12,11 +12,9 @@ import { useAppSelector } from '../../../redux/hooks';
 import { IOptions } from '../../../components/form/SelectField/interfaces';
 import { roleList, Roles } from '../../../intefaces/role';
 
-const initialValues = {
-  role: Roles.USER
-}
+const initialValues = {}
 
-const UserAddPage = () => {
+const CompanyAddPage = () => {
   const classes = useStyles();
   const companies = useAppSelector(state => state.company.data);
   const data: IOptions = [ { label: '', value: '' } ];
@@ -39,40 +37,17 @@ const UserAddPage = () => {
     >
       <Form className={classes.layout} noValidate>
         <Typography variant="h6" gutterBottom>
-          Добавить пользователя
+          Добавить компанию
         </Typography>
         <Paper className={classes.paper}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <Field
                 required
-                name="firstName"
-                label="Имя"
+                name="name"
+                label="Название"
                 autoFocus
                 component={InputTextField}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                required
-                name="lastName"
-                label="Фамилия"
-                component={InputTextField}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                name="middleName"
-                label="Отчетсво"
-                component={InputTextField}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                name="company"
-                label="Компания"
-                data={data}
-                component={SelectField}
               />
             </Grid>
             <Grid item xs={12}>
@@ -86,19 +61,20 @@ const UserAddPage = () => {
             <Grid item xs={12}>
               <Field
                 required
-                label="Пароль"
-                name="password"
-                type="password"
+                label="Url (http://)"
+                name="url"
                 component={InputTextField}
               />
             </Grid>
             <Grid item xs={12}>
-              <Field
-                name="role"
-                label="Роль"
-                data={roleList}
-                component={SelectField}
-              />
+              <Box style={{ marginTop: '20px' }}>
+                <InputLabel>Описание</InputLabel>
+                <TextareaAutosize
+                  style={{ width: '100%', minHeight: '160px', marginTop: '10px' }}
+                  aria-label="empty textarea"
+                  placeholder=""
+                />
+              </Box>
             </Grid>
 
             <Grid item xs={12}>
@@ -119,4 +95,4 @@ const UserAddPage = () => {
   );
 }
 
-export default UserAddPage;
+export default CompanyAddPage;

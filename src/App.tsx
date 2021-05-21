@@ -30,11 +30,12 @@ const App: React.FC = () => {
             <Route
               key={route.path}
               path={route.path}
+              exact={route.exact}
               component={RouteComponent}
             />
           )
         })}
-        <Redirect push to={'error'} />
+        <Redirect push to={'/error'} />
       </Switch>
     </Router>
   );

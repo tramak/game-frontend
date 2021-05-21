@@ -13,12 +13,16 @@ export default function* () {
     {
       id: 1,
       email: 'test@tactise.com',
-      name: 'Tactise'
+      name: 'Tactise',
+      url: 'https://tactise.com',
+      description: 'ThunkAction is defined but never used'
     },
     {
       id: 2,
       email: 'test@exness.com',
-      name: 'Exness'
+      name: 'Exness',
+      url: 'https://exness.com',
+      description: 'Action is defined but never used'
     }
   ]));
 }

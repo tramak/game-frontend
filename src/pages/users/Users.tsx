@@ -12,7 +12,7 @@ const UsersPage = () => {
 
   return (
     <div>
-      <Box m={0}>
+      <Box m={3}>
         <Button
           variant="contained"
           color="primary"

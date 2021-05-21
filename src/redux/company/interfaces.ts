@@ -1,8 +1,9 @@
 export interface ICompany {
   id: number;
-  email: string;
+  email?: string;
   name: string;
-  description: string;
+  url?: string;
+  description?: string;
 }
 
 export type ICompanies = Array<ICompany>;

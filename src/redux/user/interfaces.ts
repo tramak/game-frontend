@@ -5,8 +5,8 @@ export interface IAddUserFormValues {
   firstName?: string;
   middleName?: string;
   lastName?: string;
-  company?: number;
-  role?: number;
+  company?: string;
+  role?: string;
   email?: string;
   password?: string;
 }

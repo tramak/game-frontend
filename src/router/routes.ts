@@ -15,6 +15,12 @@ export const routes: IRouter = [
     layout: MainLayout
   },
   {
+    path: '/company/add',
+    exact: true,
+    component: pages.CompanyAddPage,
+    layout: MainLayout
+  },
+  {
     path: '/users',
     exact: true,
     component: pages.Users,
