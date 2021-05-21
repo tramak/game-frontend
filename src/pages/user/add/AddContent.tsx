@@ -1,0 +1,96 @@
+import React from 'react';
+import Grid from '@material-ui/core/Grid';
+import { Field, useField } from 'formik';
+import InputTextField from '../../../components/form/InputTextField/InputTextField';
+import SelectField from '../../../components/form/SelectField/SelectField';
+import { roleList, Roles } from '../../../intefaces/role';
+import { Box, Paper } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import useStyles from './Add.styles';
+import { useAppSelector } from '../../../redux/hooks';
+import { IOptions } from '../../../components/form/SelectField/interfaces';
+
+const AddContent = () => {
+  const classes = useStyles();
+  const [ roleField ] = useField('role');
+  const companies = useAppSelector(state => state.company.data);
+  const data: IOptions = [ { label: '', value: '' } ];
+
+  (companies || []).forEach(company => {
+    data.push({
+      label: company.name,
+      value: String(company.id)
+    });
+  });
+
+  return (
+    <Paper className={classes.paper}>
+      <Grid container spacing={1}>
+        <Grid item xs={12}>
+          <Field
+            required
+            name="fio"
+            label="ФИО сотрудника"
+            autoFocus
+            component={InputTextField}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Field
+            name="company"
+            label="Компания"
+            data={data}
+            component={SelectField}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Field
+            required
+            label="Электронная почта"
+            name="email"
+            component={InputTextField}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Field
+            name="group"
+            label="Группа"
+            component={InputTextField}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Field
+            name="role"
+            label="Роль"
+            data={roleList}
+            component={SelectField}
+          />
+        </Grid>
+        {roleField.value !== Roles.USER && (
+          <Grid item xs={12}>
+            <Field
+              label="Пароль"
+              name="password"
+              component={InputTextField}
+            />
+          </Grid>
+        )}
+
+        <Grid item xs={12}>
+          <Box className={classes.buttons}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              type="submit"
+            >
+              Добавить
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
+    </Paper>
+  );
+};
+
+export default AddContent;

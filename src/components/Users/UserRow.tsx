@@ -8,16 +8,16 @@ import Collapse from '@material-ui/core/Collapse';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import useRowStyles from './UserRow.styles';
-import { createData } from './utils';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
+import { IUser } from '../../redux/user/interfaces';
 
 interface IProps {
-  row: ReturnType<typeof createData>
+  user: IUser
 }
 
-const UserRow: React.FC<IProps> = ({ row }) => {
+const UserRow: React.FC<IProps> = ({ user }) => {
   const [ open, setOpen ] = React.useState(false);
   const classes = useRowStyles();
 
@@ -30,14 +30,17 @@ const UserRow: React.FC<IProps> = ({ row }) => {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.name}
+          {user.fio}
         </TableCell>
-        <TableCell>{row.email}</TableCell>
-        <TableCell>{row.company}</TableCell>
-        <TableCell>{row.access}</TableCell>
+        <TableCell>{user.company}</TableCell>
+        <TableCell>{user.email}</TableCell>
+        <TableCell>{user.group}</TableCell>
+        <TableCell>{user.role}</TableCell>
+        <TableCell>{user.invitationAt}</TableCell>
+        <TableCell>{user.status}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Button

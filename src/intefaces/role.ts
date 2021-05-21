@@ -1,9 +1,9 @@
 import { IOptions } from '../components/form/SelectField/interfaces';
 
 export enum Roles {
-  USER = '10',
-  ADMIN_COMPANY = '50',
-  ADMIN = '100'
+  USER = 'USER',
+  ADMIN_COMPANY = 'ADMIN_COMPANY',
+  ADMIN = 'ADMIN'
 }
 
 export const roleList: IOptions = [

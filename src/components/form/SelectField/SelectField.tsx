@@ -17,10 +17,10 @@ const SelectField: React.FC<IProps & FieldProps> = (
   }
 ) => {
   const classes = useStyles();
-  const labelId = `select-label-${name}`;
+  const labelId = `select-label-${field.name}`;
 
   const handleChange = (e: React.ChangeEvent<{ value: unknown }>) => {
-    form.setFieldValue(name, e.target.value);
+    form.setFieldValue(field.name, e.target.value);
   }
 
   return (
@@ -31,7 +31,7 @@ const SelectField: React.FC<IProps & FieldProps> = (
         value={field.value}
         onChange={handleChange}
         inputProps={{
-          name: name,
+          name: field.name,
           id: labelId,
         }}
       >

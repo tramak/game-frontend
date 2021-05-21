@@ -25,6 +25,7 @@ const InputTextField: React.FC<FieldRenderProps<IProps>> = (
   return (
     <TextField
       {...field}
+      value={field.value || ''}
       margin="normal"
       required={required}
       variant={variant}

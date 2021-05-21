@@ -1,0 +1,1 @@
+export const FETCH_ADD_USER = '@USER/FETCH_ADD_USER;'
