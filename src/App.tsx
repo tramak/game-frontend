@@ -9,6 +9,7 @@ import './App.css';
 const App: React.FC = () => {
   const token = useAppSelector(state => state.auth.token);
 
+  console.log({ token });
   return (
     <Router history={history}>
       <Switch>

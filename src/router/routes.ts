@@ -39,7 +39,7 @@ export const routes: IRouter = [
   {
     path: '/',
     exact: true,
-    component: pages.Index,
+    component: pages.Users,
     layout: MainLayout
   },
 ]

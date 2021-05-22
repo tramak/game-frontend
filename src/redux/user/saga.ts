@@ -2,6 +2,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import * as actions from '../actions';
 import * as I from './interfaces';
 import { Roles } from '../../intefaces/role';
+import * as CONST from './constants';
 
 function* fetchUsers(action: I.IFetchAddUserAction) {
   const { payload } = action;
@@ -15,7 +16,7 @@ function* fetchAddUser(action: I.IFetchAddUserAction) {
 }
 
 export default function* () {
-  yield takeLatest(actions.fetchAddUser, fetchAddUser);
+  yield takeLatest(CONST.FETCH_ADD_USER, fetchAddUser);
 
   yield put(actions.setUsers([
     {

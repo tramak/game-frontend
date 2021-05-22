@@ -1,11 +1,21 @@
 import * as CONST from './constants';
 import { IResponse } from '../../intefaces';
 import { FC } from 'react';
+import { Roles } from '../../intefaces/role';
+
+export interface IProfile {
+  fio: string;
+  email: string;
+  photo: string;
+  roles: Array<Roles>,
+  status: string;
+}
 
 export interface IAuthState {
   token?: {
     access: string;
   };
+  profile?: IProfile;
 }
 
 export interface ISingInFormValues {
@@ -33,3 +43,6 @@ export interface IRouteItem {
 }
 
 export type IRouter = Array<IRouteItem>;
+
+// GET Profile
+export type IGetProfileResponse = IResponse<IProfile>;

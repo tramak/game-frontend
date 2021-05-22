@@ -38,7 +38,7 @@ HTTP.interceptors.response.use(
     const status = error.response ? error.response.status : 408;
     if (status === 401) {
       delete localStorage.jwtToken;
-      history.push('/login');
+      history.push('/singIn');
     }
     return Promise.reject(error);
   }

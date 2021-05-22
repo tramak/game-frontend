@@ -4,7 +4,7 @@ import { IUserState } from './interfaces';
 const initialState: IUserState = {};
 
 const slice = createSlice({
-  name: 'users',
+  name: 'user',
   initialState,
   reducers: {
     setUsers(state, action) {

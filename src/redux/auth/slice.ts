@@ -15,13 +15,21 @@ const slice = createSlice({
     },
     clearToken(state) {
       delete state.token;
+    },
+    setProfile(state, action) {
+      state.profile = action.payload;
+    },
+    clearProfile(state) {
+      delete state.profile;
     }
   }
 });
 
 export const {
   setToken,
-  clearToken
+  clearToken,
+  setProfile,
+  clearProfile
 } = slice.actions;
 
 export default slice.reducer;

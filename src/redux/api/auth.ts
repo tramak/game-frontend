@@ -5,3 +5,7 @@ import { AxiosResponse } from 'axios';
 export const fetchSingIn = (data: I.ISingInFormValues): Promise<AxiosResponse<I.ISingInFormResponse>> => {
   return agent.POST('/auth/login', data);
 };
+
+export const fetchGetProfile = (): Promise<AxiosResponse<I.IGetProfileResponse>> => {
+  return agent.GET('/profile');
+}

@@ -9,17 +9,25 @@ import { Formik, Field, Form } from 'formik';
 import Copyright from '../../components/Copyright/Copyright';
 import InputTextField from '../../components/form/InputTextField/InputTextField';
 import { ISingInFormValues } from '../../redux/auth/interfaces';
-import { useActions } from '../../redux/hooks';
+import { useActions, useAppSelector } from '../../redux/hooks';
 import { useStyles } from './SingIn.styles';
+import { useHistory } from 'react-router';
 
 const SignIn = () => {
   const classes = useStyles();
+  const history = useHistory();
   const { fetchSingIn } = useActions();
+  const token = useAppSelector(state => state.auth.token?.access);
+
+  React.useEffect(() => {
+    if (token) {
+      history.push('/');
+    }
+  }, [ token ]);
 
   // const handlerSubmit = (values: ISingInForm, { setSubmitting }: FormikHelpers<FormValues>) => {
   const handlerSubmit = (values: ISingInFormValues) => {
     fetchSingIn(values);
-    console.log({ values });
   }
 
   return (
