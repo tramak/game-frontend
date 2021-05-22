@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Field, useField } from 'formik';
 import InputTextField from '../../../components/form/InputTextField/InputTextField';
@@ -6,7 +6,7 @@ import SelectField from '../../../components/form/SelectField/SelectField';
 import { roleList, Roles } from '../../../intefaces/role';
 import { Box, Paper } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import useStyles from './Add.styles';
+import useStyles from '../../../styles/Form.styles';
 import { useAppSelector } from '../../../redux/hooks';
 import { IOptions } from '../../../components/form/SelectField/interfaces';
 
@@ -14,14 +14,19 @@ const AddContent = () => {
   const classes = useStyles();
   const [ roleField ] = useField('role');
   const companies = useAppSelector(state => state.company.data);
-  const data: IOptions = [ { label: '', value: '' } ];
+  const [ data, setData ] = useState<IOptions>([])
 
-  (companies || []).forEach(company => {
-    data.push({
-      label: company.name,
-      value: String(company.id)
+  useEffect(() => {
+    const newData: IOptions = [ { label: '', value: '' } ];
+    (companies || []).forEach(company => {
+      newData.push({
+        label: company.name,
+        value: String(company.id)
+      });
     });
-  });
+
+    setData(newData)
+  }, [ companies ]);
 
   return (
     <Paper className={classes.paper}>

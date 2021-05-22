@@ -12,6 +12,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import { ICompany } from '../../redux/company/interfaces';
+import { useHistory } from 'react-router';
+import { useConfirm } from 'material-ui-confirm';
+import { useActions } from '../../redux/hooks';
 
 interface IProps {
   row: ICompany
@@ -19,7 +22,20 @@ interface IProps {
 
 const UserRow: React.FC<IProps> = ({ row }) => {
   const [ open, setOpen ] = React.useState(false);
+  const { fetchCompanyDelete } = useActions();
   const classes = useRowStyles();
+  const history = useHistory();
+  const confirm = useConfirm();
+
+  const deleteCompany = () => {
+    confirm({
+      title: 'Вы уверенны что хотите удалить компанию?',
+      cancellationText: 'Отмена'
+    })
+      .then(() => {
+        fetchCompanyDelete(row.id);
+      });
+  }
 
   return (
     <React.Fragment>
@@ -44,6 +60,7 @@ const UserRow: React.FC<IProps> = ({ row }) => {
                 color="primary"
                 className={classes.button}
                 startIcon={<EditIcon />}
+                onClick={() => history.push(`/company/edit/${row.id}`)}
               >
                 Редактировать
               </Button>
@@ -53,6 +70,7 @@ const UserRow: React.FC<IProps> = ({ row }) => {
                 color="secondary"
                 className={classes.button}
                 startIcon={<DeleteIcon />}
+                onClick={deleteCompany}
               >
                 Удалить
               </Button>

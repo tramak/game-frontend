@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import FontDownloadOutlinedIcon from '@material-ui/icons/FontDownloadOutlined';
+import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import Users from '../../components/Users/Users';
 import useStyles from './Users.styles';
 import Box from '@material-ui/core/Box';
@@ -39,7 +39,7 @@ const UsersPage = () => {
           variant="contained"
           color="primary"
           className={classes.button}
-          startIcon={<FontDownloadOutlinedIcon />}
+          startIcon={<DescriptionOutlinedIcon />}
           onClick={() => alert('В разработке')}
         >
           Импорт

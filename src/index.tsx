@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'fontsource-roboto';
+import { ConfirmProvider } from 'material-ui-confirm';
 import App from './App';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
@@ -10,7 +11,9 @@ import './index.css';
 ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <App />
+    <ConfirmProvider>
+      <App />
+    </ConfirmProvider>
   </Provider>,
   // </React.StrictMode>,
   document.getElementById('root')

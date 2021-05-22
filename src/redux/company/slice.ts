@@ -11,11 +11,20 @@ const slice = createSlice({
       const data = action.payload;
       state.data = data;
     },
+    setCompany(state, action) {
+      const company = action.payload;
+      state.companyActive = company;
+    },
+    clearCompany(state) {
+      delete state.companyActive;
+    }
   }
 });
 
 export const {
-  setCompanies
+  setCompanies,
+  setCompany,
+  clearCompany
 } = slice.actions;
 
 export default slice.reducer;

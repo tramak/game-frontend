@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import Typography from '@material-ui/core/Typography';
-import useStyles from './Add.styles';
+import useStyles from '../../../styles/Form.styles';
 import { IAddUserFormValues } from '../../../redux/user/interfaces';
 import { Roles } from '../../../intefaces/role';
 import { generate } from 'generate-password';
