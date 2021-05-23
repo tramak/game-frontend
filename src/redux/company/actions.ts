@@ -1,7 +1,5 @@
 import * as I from './interfaces';
 import * as CONST from './constants';
-import { FETCH_COMPANY_EDIT } from './constants';
-import { IFetchCompanyEditAction } from './interfaces';
 
 export const fetchCompanies = () => ({
   type: CONST.FETCH_COMPANIES
@@ -12,12 +10,12 @@ export const fetchCompany = (id: number | string) => ({
   payload: id
 });
 
-export const fetchCompanyAdd = (payload: I.IAddCompanyFormValues): I.IFetchCompanyAddAction => ({
+export const fetchCompanyAdd = (payload: I.ICompanyAddFormValues): I.IFetchCompanyAddAction => ({
   type: CONST.FETCH_COMPANY_ADD,
   payload
 });
 
-export const fetchCompanyEdit = (id: number | string, data: I.IAddCompanyFormValues): I.IFetchCompanyEditAction => ({
+export const fetchCompanyEdit = (id: number | string, data: I.ICompanyAddFormValues): I.IFetchCompanyEditAction => ({
   type: CONST.FETCH_COMPANY_EDIT,
   payload: {
     id,

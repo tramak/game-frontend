@@ -8,7 +8,7 @@ import useStyles from '../../styles/Form.styles';
 import InputTextField from '../form/InputTextField/InputTextField';
 import { useActions, useAppSelector } from '../../redux/hooks';
 import TextAreaField from '../form/TextAreaField/TextAreaField';
-import { IAddCompanyFormValues } from '../../redux/company/interfaces';
+import { ICompanyAddFormValues } from '../../redux/company/interfaces';
 
 interface IProps {
   id?: string | number;
@@ -30,7 +30,7 @@ const CompanyEdit: React.FC<IProps> = ({ id }) => {
     }
   }, [ id ]);
 
-  const handlerSubmit = (values: IAddCompanyFormValues) => {
+  const handlerSubmit = (values: ICompanyAddFormValues) => {
     if (id) {
       fetchCompanyEdit(id, values);
     } else {

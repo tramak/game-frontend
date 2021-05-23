@@ -6,6 +6,7 @@ import Index from './index/Index';
 import NoAccess from './noAccess/NoAccess';
 import SingIn from './singIn/SingIn';
 import UserAddPage from './user/add/Add';
+import UserEditPage from './user/edit/Edit';
 import Users from './users/Users';
 
 export {
@@ -17,5 +18,6 @@ export {
   NoAccess,
   SingIn,
   UserAddPage,
+  UserEditPage,
   Users
 }

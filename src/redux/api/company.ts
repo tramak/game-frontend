@@ -10,11 +10,11 @@ export const fetchCompany = (id: number | string): Promise<AxiosResponse<I.IFetc
   return agent.GET(`/company/${id}`);
 };
 
-export const fetchCompanyAdd = (data: I.IAddCompanyFormValues): Promise<AxiosResponse<I.IFetchCompanyAddResponse>> => {
+export const fetchCompanyAdd = (data: I.ICompanyAddFormValues): Promise<AxiosResponse<I.IFetchCompanyAddResponse>> => {
   return agent.POST('/company', data);
 };
 
-export const fetchCompanyEdit = (id: number | string, data: I.IAddCompanyFormValues): Promise<AxiosResponse<I.IFetchCompanyEditResponse>> => {
+export const fetchCompanyEdit = (id: number | string, data: I.ICompanyAddFormValues): Promise<AxiosResponse<I.IFetchCompanyEditResponse>> => {
   return agent.PUT(`/company/${id}`, data);
 };
 

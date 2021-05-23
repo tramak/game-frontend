@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Field, useField } from 'formik';
-import InputTextField from '../../../components/form/InputTextField/InputTextField';
-import SelectField from '../../../components/form/SelectField/SelectField';
-import { roleList, Roles } from '../../../intefaces/role';
+import InputTextField from '../form/InputTextField/InputTextField';
+import SelectField from '../form/SelectField/SelectField';
+import { roleList, Roles } from '../../intefaces/role';
 import { Box, Paper } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import useStyles from '../../../styles/Form.styles';
-import { useAppSelector } from '../../../redux/hooks';
-import { IOptions } from '../../../components/form/SelectField/interfaces';
+import useStyles from '../../styles/Form.styles';
+import { useAppSelector } from '../../redux/hooks';
+import { IOptions } from '../form/SelectField/interfaces';
+import { IUser } from '../../redux/user/interfaces';
 
-const AddContent = () => {
+interface IProps {
+  user?: IUser
+}
+const UserEditContent: React.FC<IProps> = ({ user }) => {
+  const isEdit = !!user;
   const classes = useStyles();
   const [ roleField ] = useField('role');
   const companies = useAppSelector(state => state.company.data);
@@ -42,7 +47,7 @@ const AddContent = () => {
         </Grid>
         <Grid item xs={12}>
           <Field
-            name="company"
+            name="companyId"
             label="Компания"
             data={data}
             component={SelectField}
@@ -89,7 +94,7 @@ const AddContent = () => {
               className={classes.button}
               type="submit"
             >
-              Добавить
+              {isEdit ? 'Редактировать' : 'Добавить'}
             </Button>
           </Box>
         </Grid>
@@ -98,4 +103,4 @@ const AddContent = () => {
   );
 };
 
-export default AddContent;
+export default UserEditContent;

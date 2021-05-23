@@ -1,43 +1,61 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
+import { AxiosResponse } from 'axios';
+import * as api from '../api';
 import * as actions from '../actions';
 import * as I from './interfaces';
-import { Roles } from '../../intefaces/role';
 import * as CONST from './constants';
+import { history } from '../history';
 
-function* fetchUsers(action: I.IFetchAddUserAction) {
-  const { payload } = action;
-
+function* fetchUsers() {
+  try {
+    const response: AxiosResponse<I.IFetchUsersResponse> = yield call(api.fetchUsers);
+    const users = response.data as I.IUsers;
+    yield put(actions.setUsers(users));
+  } catch(e) {}
 }
 
-function* fetchAddUser(action: I.IFetchAddUserAction) {
-  const { payload } = action;
-  console.log({ payload });
+function* fetchUser(action: I.IFetchUserAction) {
+  const { payload: id } = action;
 
+  try {
+    const response: AxiosResponse<I.IFetchUserResponse> = yield call(api.fetchUser, id);
+    const user = response.data as I.IUser;
+    yield put(actions.setUser(user));
+  } catch(e) {}
+}
+
+function* fetchUserAdd(action: I.IFetchUserAddAction) {
+  const { payload } = action;
+
+  try {
+    const response: AxiosResponse<I.IFetchUserAddResponse> = yield call(api.fetchUserAdd, payload);
+    history.push('/users');
+  } catch(e) {}
+}
+
+function* fetchUserEdit(action: I.IFetchUserEditAction) {
+  const { payload } = action;
+  const { id, data } = payload;
+
+  try {
+    const response: AxiosResponse<I.IFetchUserEditResponse> = yield call(api.fetchUserEdit, id, data);
+    history.push('/users');
+  } catch (e) {}
+}
+
+function* fetchUserDelete(action: I.IFetchUserDeleteAction) {
+  const { payload: id } = action;
+
+  try {
+    const response: AxiosResponse<I.IFetchUserDeleteResponse> = yield call(api.fetchUserDelete, id);
+    yield put(actions.fetchUsers());
+  } catch (e) {}
 }
 
 export default function* () {
-  yield takeLatest(CONST.FETCH_ADD_USER, fetchAddUser);
-
-  yield put(actions.setUsers([
-    {
-      id: 1,
-      fio: 'Калаев Виктор Владимирович',
-      company: 'Tactise',
-      email: 'test@tactise.com',
-      group: 'Офис',
-      role: Roles.USER,
-      invitationAt: new Date().toISOString(),
-      status: 0
-    },
-    {
-      id: 2,
-      fio: 'Калаев Виктор Владимирович',
-      company: 'Tactise',
-      email: 'test@tactise.com',
-      group: 'Офис',
-      role: Roles.ADMIN,
-      invitationAt: new Date().toISOString(),
-      status: 0
-    },
-  ]));
+  yield takeLatest(CONST.FETCH_USER_ADD, fetchUserAdd);
+  yield takeLatest(CONST.FETCH_USER_EDIT, fetchUserEdit);
+  yield takeLatest(CONST.FETCH_USER_DELETE, fetchUserDelete);
+  yield takeLatest(CONST.FETCH_USERS, fetchUsers);
+  yield takeLatest(CONST.FETCH_USER, fetchUser);
 }

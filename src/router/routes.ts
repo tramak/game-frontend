@@ -31,10 +31,17 @@ export const routes: IRouter = [
     exact: true,
     component: pages.Users,
     layout: MainLayout
-  },{
+  },
+  {
     path: '/user/add',
     exact: true,
     component: pages.UserAddPage,
+    layout: MainLayout
+  },
+  {
+    path: '/user/edit/:id',
+    exact: true,
+    component: pages.UserEditPage,
     layout: MainLayout
   },
   {

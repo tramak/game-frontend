@@ -12,6 +12,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import { IUser } from '../../redux/user/interfaces';
+import { useHistory } from 'react-router';
+import { useActions } from '../../redux/hooks';
+import { useConfirm } from 'material-ui-confirm';
 
 interface IProps {
   user: IUser
@@ -20,6 +23,19 @@ interface IProps {
 const UserRow: React.FC<IProps> = ({ user }) => {
   const [ open, setOpen ] = React.useState(false);
   const classes = useRowStyles();
+  const history = useHistory();
+  const { fetchUserDelete } = useActions();
+  const confirm = useConfirm();
+
+  const deleteUser = () => {
+    confirm({
+      title: 'Вы уверенны что хотите удалить пользователя?',
+      cancellationText: 'Отмена'
+    })
+      .then(() => {
+        fetchUserDelete(user.id);
+      });
+  }
 
   return (
     <React.Fragment>
@@ -35,7 +51,7 @@ const UserRow: React.FC<IProps> = ({ user }) => {
         <TableCell>{user.company}</TableCell>
         <TableCell>{user.email}</TableCell>
         <TableCell>{user.group}</TableCell>
-        <TableCell>{user.role}</TableCell>
+        <TableCell>{user.roles?.join(', ')}</TableCell>
         <TableCell>{user.invitationAt}</TableCell>
         <TableCell>{user.status}</TableCell>
       </TableRow>
@@ -48,6 +64,7 @@ const UserRow: React.FC<IProps> = ({ user }) => {
                 color="primary"
                 className={classes.button}
                 startIcon={<EditIcon />}
+                onClick={() => history.push(`/user/edit/${user.id}`)}
               >
                 Редактировать
               </Button>
@@ -57,6 +74,7 @@ const UserRow: React.FC<IProps> = ({ user }) => {
                 color="secondary"
                 className={classes.button}
                 startIcon={<DeleteIcon />}
+                onClick={deleteUser}
               >
                 Удалить
               </Button>

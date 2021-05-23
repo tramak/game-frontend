@@ -1,6 +1,5 @@
 import * as CONST from './constants';
 import { IResponse } from '../../intefaces';
-import { FETCH_COMPANY_DELETE } from './constants';
 
 export interface ICompany {
   id: number;
@@ -17,7 +16,7 @@ export interface ICompanyState {
 }
 
 // Add Company
-export interface IAddCompanyFormValues {
+export interface ICompanyAddFormValues {
   name: string;
   email: string;
   description?: string;
@@ -26,7 +25,7 @@ export interface IAddCompanyFormValues {
 
 export interface IFetchCompanyAddAction {
   type: typeof CONST.FETCH_COMPANY_ADD;
-  payload: IAddCompanyFormValues
+  payload: ICompanyAddFormValues
 }
 
 export type IFetchCompanyAddSuccess = ICompany;
@@ -37,7 +36,7 @@ export interface IFetchCompanyEditAction {
   type: typeof CONST.FETCH_COMPANY_EDIT;
   payload: {
     id: number | string;
-    data: IAddCompanyFormValues
+    data: ICompanyAddFormValues
   }
 }
 

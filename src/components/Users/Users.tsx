@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TableContainer from '@material-ui/core/TableContainer';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -9,10 +9,15 @@ import TableBody from '@material-ui/core/TableBody';
 import UserRow from './UserRow';
 import { IUsers } from '../../redux/user/interfaces';
 import { Roles } from '../../intefaces/role';
-import { useAppSelector } from '../../redux/hooks';
+import { useActions, useAppSelector } from '../../redux/hooks';
 
 const Users: React.FC = () => {
   const users = useAppSelector(state => state.user.list);
+  const { fetchUsers } = useActions();
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   return (
     <TableContainer component={Paper}>

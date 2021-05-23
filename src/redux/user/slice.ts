@@ -11,11 +11,20 @@ const slice = createSlice({
       const data = action.payload;
       state.list = data;
     },
+    setUser(state, action) {
+      const user = action.payload;
+      state.userActive = user;
+    },
+    clearUser(state) {
+      delete state.userActive;
+    }
   }
 });
 
 export const {
-  setUsers
+  setUsers,
+  setUser,
+  clearUser,
 } = slice.actions;
 
 export default slice.reducer;

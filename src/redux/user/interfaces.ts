@@ -1,11 +1,10 @@
-// import * as CONST from './constants';
 import { IResponse } from '../../intefaces';
 import { Roles } from '../../intefaces/role';
 import * as CONST from './constants';
 
-export interface IAddUserFormValues {
+export interface IUserAddFormValues {
   fio?: string;
-  company?: string;
+  companyId?: number | string;
   role?: string;
   email?: string;
   group?: string;
@@ -15,8 +14,9 @@ export interface IAddUserFormValues {
 export interface IUser {
   id: string | number;
   fio: string;
+  companyId?: string | number;
   company?: string;
-  role?: Roles;
+  roles?: Array<Roles>;
   email: string;
   group?: string;
   invitationAt: string;
@@ -27,9 +27,42 @@ export type IUsers = Array<IUser>;
 
 export interface IUserState {
   list?: IUsers;
+  userActive?: IUser
 }
 
-export interface IFetchAddUserAction {
-  type: typeof CONST.FETCH_ADD_USER,
-  payload: IAddUserFormValues
+// Add User
+export interface IFetchUserAddAction {
+  type: typeof CONST.FETCH_USER_ADD,
+  payload: IUserAddFormValues
 }
+
+export type IFetchUserAddResponse = IResponse<IUser>;
+
+// Edit User
+export interface IFetchUserEditAction {
+  type: typeof CONST.FETCH_USER_EDIT,
+  payload: {
+    id: number | string;
+    data: IUserAddFormValues;
+  }
+}
+
+export type IFetchUserEditResponse = IResponse<IUser>;
+
+// Delete User
+export interface IFetchUserDeleteAction {
+  type: typeof CONST.FETCH_USER_DELETE;
+  payload: number | string;
+}
+
+export type IFetchUserDeleteResponse = IResponse<unknown>;
+
+// FETCH USERS
+export type IFetchUsersResponse = IResponse<IUsers>;
+
+// FETCH USER
+export interface IFetchUserAction {
+  type: typeof CONST.FETCH_USER,
+  payload: string | number;
+}
+export type IFetchUserResponse = IResponse<IUser>;

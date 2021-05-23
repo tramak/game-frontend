@@ -1,1 +1,5 @@
-export const FETCH_ADD_USER = '@USER/FETCH_ADD_USER;'
+export const FETCH_USERS = '@USER/FETCH_USERS';
+export const FETCH_USER = '@USER/FETCH_USER';
+export const FETCH_USER_ADD = '@USER/FETCH_USER_ADD';
+export const FETCH_USER_EDIT = '@USER/FETCH_USER_EDIT';
+export const FETCH_USER_DELETE = '@USER/FETCH_USER_DELETE';
