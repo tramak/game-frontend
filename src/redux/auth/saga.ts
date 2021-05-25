@@ -5,12 +5,14 @@ import * as I from './interfaces';
 import * as api from '../api';
 import * as CONST from './constants';
 import { history } from '../history';
+import { request, requestC } from '../utils/request';
 
 function* fetchSingIn(action: I.IFetchSingInAction) {
   const { payload } = action;
 
   try {
-    const response: AxiosResponse<I.ISingInFormResponse> = yield call(api.fetchSingIn, payload);
+    const response: AxiosResponse<I.ISingInFormResponse> = yield requestC([ api.fetchSingIn, action ], payload);
+    // const response: AxiosResponse<I.ISingInFormResponse> = yield request(api.fetchSingIn, payload);
     const jwtToken = (response?.data as I.ISingInFormResponseSuccess).jwtToken;
     localStorage.jwtToken = jwtToken;
     yield put(actions.setToken({ jwtToken }));

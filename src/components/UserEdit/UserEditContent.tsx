@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
-import { Field, useField } from 'formik';
+import { Field, useField } from 'react-final-form';
 import InputTextField from '../form/InputTextField/InputTextField';
 import SelectField from '../form/SelectField/SelectField';
 import { roleList, Roles } from '../../intefaces/role';
@@ -17,9 +17,9 @@ interface IProps {
 const UserEditContent: React.FC<IProps> = ({ user }) => {
   const isEdit = !!user;
   const classes = useStyles();
-  const [ roleField ] = useField('role');
+  const roleField = useField('role');
   const companies = useAppSelector(state => state.company.data);
-  const [ data, setData ] = useState<IOptions>([])
+  const [ data, setData ] = useState<IOptions>([]);
 
   useEffect(() => {
     const newData: IOptions = [ { label: '', value: '' } ];
@@ -49,7 +49,7 @@ const UserEditContent: React.FC<IProps> = ({ user }) => {
           <Field
             name="companyId"
             label="Компания"
-            data={data}
+            options={data}
             component={SelectField}
           />
         </Grid>
@@ -72,11 +72,11 @@ const UserEditContent: React.FC<IProps> = ({ user }) => {
           <Field
             name="role"
             label="Роль"
-            data={roleList}
+            options={roleList}
             component={SelectField}
           />
         </Grid>
-        {roleField.value !== Roles.USER && (
+        {roleField.input.value !== Roles.USER && (
           <Grid item xs={12}>
             <Field
               label="Пароль"

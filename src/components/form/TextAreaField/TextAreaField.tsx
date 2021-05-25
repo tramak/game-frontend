@@ -1,9 +1,9 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import { FieldProps, FieldRenderProps } from 'react-final-form';
+import { FieldRenderProps } from 'react-final-form';
 import { Box, InputLabel, TextareaAutosize } from '@material-ui/core';
+import useStyles from './TextAreaField.styles';
 
-interface IProps {
+interface IProps extends FieldRenderProps<string, any> {
   name: string;
   label: string;
   type?: string;
@@ -12,29 +12,31 @@ interface IProps {
   autoFocus: boolean
 }
 
-const TextAreaField: React.FC<FieldRenderProps<IProps>> = (
+const TextAreaField: React.FC<IProps> = (
   {
     label,
     required,
     autoFocus,
-    field,
+    input,
   }
 ) => {
+  const classes = useStyles();
+
   return (
     <Box style={{ marginTop: '20px' }}>
       <InputLabel>{label}</InputLabel>
       <TextareaAutosize
-        style={{ width: '100%', minHeight: '160px', marginTop: '10px' }}
-        {...field}
-        value={field.value || ''}
+        {...input}
+        value={input.value || ''}
         aria-label="empty textarea"
         placeholder=""
         autoFocus={autoFocus}
         required={required}
-        name={field.name}
+        name={input.name}
+        className={classes.textarea}
       />
     </Box>
   );
-}
+};
 
 export default TextAreaField;

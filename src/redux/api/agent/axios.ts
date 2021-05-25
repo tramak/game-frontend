@@ -38,7 +38,8 @@ HTTP.interceptors.response.use(
   (response) => response,
   (error) => {
     const status = error.response ? error.response.status : 408;
-    if (status === 401) {
+
+    if (status === 401 && history.location.pathname !== '/singIn') {
       delete localStorage.jwtToken;
       store.dispatch(actions.clearToken());
       history.push('/singIn');

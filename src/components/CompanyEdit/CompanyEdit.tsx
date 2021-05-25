@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Formik, Field, Form } from 'formik';
+import { Field, Form } from 'react-final-form';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { Box, Paper } from '@material-ui/core';
@@ -30,7 +30,7 @@ const CompanyEdit: React.FC<IProps> = ({ id }) => {
     }
   }, [ id ]);
 
-  const handlerSubmit = (values: ICompanyAddFormValues) => {
+  const onSubmit = (values: ICompanyAddFormValues) => {
     if (id) {
       fetchCompanyEdit(id, values);
     } else {
@@ -50,66 +50,67 @@ const CompanyEdit: React.FC<IProps> = ({ id }) => {
   }
 
   return (
-    <Formik
-      onSubmit={handlerSubmit}
+    <Form
       initialValues={initialValues}
-    >
-      <Form className={classes.layout} noValidate>
-        <Typography variant="h6" gutterBottom>
-          {isEdit ? 'Редактировать компанию' : 'Добавить компанию'}
-        </Typography>
-        <Paper className={classes.paper}>
-          <Grid container spacing={1}>
-            <Grid item xs={12}>
-              <Field
-                required
-                name="name"
-                label="Название"
-                autoFocus
-                component={InputTextField}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                required
-                label="Электронная почта"
-                name="email"
-                component={InputTextField}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                required
-                label="Url (http://)"
-                name="url"
-                component={InputTextField}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                name="description"
-                label="Описание"
-                component={TextAreaField}
-              />
-            </Grid>
+      onSubmit={onSubmit}
+      render={({ handleSubmit, valid }) => (
+        <form className={classes.layout} onSubmit={handleSubmit}>
+          <Typography variant="h6" gutterBottom>
+            {isEdit ? 'Редактировать компанию' : 'Добавить компанию'}
+          </Typography>
+          <Paper className={classes.paper}>
+            <Grid container spacing={1}>
+              <Grid item xs={12}>
+                <Field
+                  required
+                  name="name"
+                  label="Название"
+                  autoFocus
+                  component={InputTextField}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  required
+                  label="Электронная почта"
+                  name="email"
+                  component={InputTextField}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  required
+                  label="Url (http://)"
+                  name="url"
+                  component={InputTextField}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  name="description"
+                  label="Описание"
+                  component={TextAreaField}
+                />
+              </Grid>
 
-            <Grid item xs={12}>
-              <Box className={classes.buttons}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  type="submit"
-                >
-                  {isEdit ? 'Редактировать' : 'Добавить'}
-                </Button>
-              </Box>
+              <Grid item xs={12}>
+                <Box className={classes.buttons}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    type="submit"
+                  >
+                    {isEdit ? 'Редактировать' : 'Добавить'}
+                  </Button>
+                </Box>
+              </Grid>
             </Grid>
-          </Grid>
-        </Paper>
-      </Form>
-    </Formik>
+          </Paper>
+        </form>
+      )}
+    />
   );
-}
+};
 
 export default CompanyEdit;

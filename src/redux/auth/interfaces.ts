@@ -1,5 +1,5 @@
 import * as CONST from './constants';
-import { IResponse } from '../../intefaces';
+import { IErrors, IResponse, PromisifiedMetaAction } from '../../intefaces';
 import { FC } from 'react';
 import { Roles } from '../../intefaces/role';
 
@@ -23,9 +23,9 @@ export interface ISingInFormValues {
   password: string;
 }
 
-export interface IFetchSingInAction {
+export interface IFetchSingInAction extends PromisifiedMetaAction<any, IErrors> {
   type: typeof CONST.FETCH_SING_IN,
-  payload: ISingInFormValues
+  payload: ISingInFormValues,
 }
 
 export interface ISingInFormResponseSuccess {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Formik, Form } from 'formik';
+import { Form } from 'react-final-form';
 import Typography from '@material-ui/core/Typography';
 import useStyles from '../../styles/Form.styles';
 import { IUserAddFormValues } from '../../redux/user/interfaces';
@@ -25,7 +25,7 @@ const UserEdit: React.FC<IProps> = ({ id }) => {
   const { fetchUserAdd, fetchUserEdit, fetchCompanies, fetchUser, clearUser } = useActions();
   const user = useAppSelector(state => state.user.userActive);
 
-  const handlerSubmit = (values: IUserAddFormValues) => {
+  const onSubmit = (values: IUserAddFormValues) => {
     if (id) {
       fetchUserEdit(id, values);
     } else {
@@ -62,18 +62,19 @@ const UserEdit: React.FC<IProps> = ({ id }) => {
   }
 
   return (
-    <Formik
-      onSubmit={handlerSubmit}
+    <Form
       initialValues={initialValues}
-    >
-      <Form className={classes.layout} noValidate>
-        <Typography variant="h6" gutterBottom>
-          {isEdit ? 'Редактировать пользователя': 'Добавить пользователя'}
-        </Typography>
-        <UserEditContent user={user} />
-      </Form>
-    </Formik>
+      onSubmit={onSubmit}
+      render={({ handleSubmit, valid }) => (
+        <form className={classes.layout} onSubmit={handleSubmit}>
+          <Typography variant="h6" gutterBottom>
+            {isEdit ? 'Редактировать пользователя': 'Добавить пользователя'}
+          </Typography>
+          <UserEditContent user={user} />
+        </form>
+      )}
+    />
   );
-}
+};
 
 export default UserEdit;

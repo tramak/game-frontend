@@ -5,22 +5,22 @@ import { FormControl, InputLabel } from '@material-ui/core';
 import useStyles from './SelectField.styles';
 import { IProps } from './interfaces';
 
-const SelectField: React.FC<IProps & FieldProps> = (
+const SelectField: React.FC<IProps> = (
   {
     name,
     label,
     required,
     autoFocus,
-    field,
-    form,
-    data
+    input,
+    options
   }
 ) => {
   const classes = useStyles();
-  const labelId = `select-label-${field.name}`;
+  const labelId = `select-label-${input.name}`;
 
+  console.log({ options, input });
   const handleChange = (e: React.ChangeEvent<{ value: unknown }>) => {
-    form.setFieldValue(field.name, e.target.value);
+    input.onChange(e.target.value);
   }
 
   return (
@@ -28,14 +28,14 @@ const SelectField: React.FC<IProps & FieldProps> = (
       <InputLabel htmlFor={labelId}>{label}</InputLabel>
       <Select
         native
-        value={field.value}
+        value={input.value}
         onChange={handleChange}
         inputProps={{
-          name: field.name,
+          name: input.name,
           id: labelId,
         }}
       >
-        {(data || []).map(item => (
+        {(options || []).map(item => (
           <option key={item.value} value={item.value.toString()}>{item.label}</option>
         ))}
       </Select>
