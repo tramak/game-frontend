@@ -8,12 +8,19 @@ import './App.css';
 
 const App: React.FC = () => {
   const token = useAppSelector(state => state.auth.token);
+  const roles = useAppSelector(state => state.auth.profile?.roles) || [];
 
-  console.log({ token });
   return (
     <Router history={history}>
       <Switch>
         {routes.map(route => {
+          if (route.allow) {
+            const intersection = route.allow.filter(x => roles.includes(x));
+            if (!intersection.length) {
+              return null;
+            }
+          }
+
           const Layout = route.layout;
           const Component = token || !route.isLogin ? route.component : pages.NoAccess;
           const RouteComponent: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any> = (props: any) => {

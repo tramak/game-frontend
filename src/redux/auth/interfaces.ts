@@ -9,6 +9,7 @@ export interface IProfile {
   photo: string;
   roles: Array<Roles>,
   status: string;
+  companyId?: number | string;
 }
 
 export interface IAuthState {
@@ -39,7 +40,8 @@ export interface IRouteItem {
   component: FC,
   exact?: boolean;
   isLogin?: boolean;
-  layout?: FC
+  layout?: FC;
+  allow?: Array<Roles>;
 }
 
 export type IRouter = Array<IRouteItem>;

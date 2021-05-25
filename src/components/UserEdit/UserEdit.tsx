@@ -23,7 +23,9 @@ const UserEdit: React.FC<IProps> = ({ id }) => {
   const isEdit = !!id;
   const classes = useStyles();
   const { fetchUserAdd, fetchUserEdit, fetchCompanies, fetchUser, clearUser } = useActions();
-  const user = useAppSelector(state => state.user.userActive);
+  const companyId = useAppSelector(state => state.auth.profile?.companyId);
+  const roles = useAppSelector(state => state.auth.profile?.roles) || [];
+  const userActive = useAppSelector(state => state.user.userActive);
 
   const onSubmit = (values: IUserAddFormValues) => {
     if (id) {
@@ -34,7 +36,9 @@ const UserEdit: React.FC<IProps> = ({ id }) => {
   }
 
   useEffect(() => {
-    fetchCompanies();
+    if (roles.includes(Roles.ADMIN)) {
+      fetchCompanies();
+    }
   }, []);
 
   useEffect(() => {
@@ -47,16 +51,16 @@ const UserEdit: React.FC<IProps> = ({ id }) => {
     }
   }, [ id ]);
 
-  if (isEdit && !user) {
+  if (isEdit && !userActive) {
     return null;
   }
 
-  const role = user?.roles && user?.roles instanceof Array ? user?.roles[0]: undefined;
+  const role = userActive?.roles && userActive?.roles instanceof Array ? userActive?.roles[0]: undefined;
   const initialValues = {
-    fio: user?.fio || '',
-    email: user?.email || '',
-    companyId: user?.companyId || '',
-    group: user?.group || '',
+    fio: userActive?.fio || '',
+    email: userActive?.email || '',
+    companyId: userActive?.companyId || companyId || '',
+    group: userActive?.group || '',
     role: role || Roles.USER,
     password: isEdit ? '' : getPassword()
   }
@@ -70,7 +74,7 @@ const UserEdit: React.FC<IProps> = ({ id }) => {
           <Typography variant="h6" gutterBottom>
             {isEdit ? 'Редактировать пользователя': 'Добавить пользователя'}
           </Typography>
-          <UserEditContent user={user} />
+          <UserEditContent user={userActive} />
         </form>
       )}
     />

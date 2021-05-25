@@ -13,6 +13,12 @@ const useStyles = makeStyles((theme: Theme) =>
     button: {
       margin: theme.spacing(1),
     },
+    statusCompleted: {
+      color: theme.palette.success.dark
+    },
+    statusNoCompleted: {
+      color: theme.palette.warning.dark
+    }
   })
 );
 

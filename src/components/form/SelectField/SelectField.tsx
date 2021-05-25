@@ -18,7 +18,6 @@ const SelectField: React.FC<IProps> = (
   const classes = useStyles();
   const labelId = `select-label-${input.name}`;
 
-  console.log({ options, input });
   const handleChange = (e: React.ChangeEvent<{ value: unknown }>) => {
     input.onChange(e.target.value);
   }
@@ -30,6 +29,7 @@ const SelectField: React.FC<IProps> = (
         native
         value={input.value}
         onChange={handleChange}
+        autoFocus={autoFocus}
         inputProps={{
           name: input.name,
           id: labelId,

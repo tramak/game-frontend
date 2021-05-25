@@ -19,6 +19,7 @@ const UserEditContent: React.FC<IProps> = ({ user }) => {
   const classes = useStyles();
   const roleField = useField('role');
   const companies = useAppSelector(state => state.company.data);
+  const roles = useAppSelector(state => state.auth.profile?.roles) || [];
   const [ data, setData ] = useState<IOptions>([]);
 
   useEffect(() => {
@@ -45,14 +46,16 @@ const UserEditContent: React.FC<IProps> = ({ user }) => {
             component={InputTextField}
           />
         </Grid>
-        <Grid item xs={12}>
-          <Field
-            name="companyId"
-            label="Компания"
-            options={data}
-            component={SelectField}
-          />
-        </Grid>
+        {roles.includes(Roles.ADMIN) && (
+          <Grid item xs={12}>
+            <Field
+              name="companyId"
+              label="Компания"
+              options={data}
+              component={SelectField}
+            />
+          </Grid>
+        )}
         <Grid item xs={12}>
           <Field
             required
@@ -68,14 +71,16 @@ const UserEditContent: React.FC<IProps> = ({ user }) => {
             component={InputTextField}
           />
         </Grid>
-        <Grid item xs={12}>
-          <Field
-            name="role"
-            label="Роль"
-            options={roleList}
-            component={SelectField}
-          />
-        </Grid>
+        {roles.includes(Roles.ADMIN) && (
+          <Grid item xs={12}>
+            <Field
+              name="role"
+              label="Роль"
+              options={roleList}
+              component={SelectField}
+            />
+          </Grid>
+        )}
         {roleField.input.value !== Roles.USER && (
           <Grid item xs={12}>
             <Field

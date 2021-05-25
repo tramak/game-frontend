@@ -13,6 +13,7 @@ import { useActions, useAppSelector } from '../../redux/hooks';
 
 const Users: React.FC = () => {
   const users = useAppSelector(state => state.user.list);
+  const roles = useAppSelector(state => state.auth.profile?.roles) || [];
   const { fetchUsers } = useActions();
 
   useEffect(() => {
@@ -26,10 +27,14 @@ const Users: React.FC = () => {
           <TableRow>
             <TableCell />
             <TableCell>ФИО</TableCell>
-            <TableCell>Компания</TableCell>
+            {roles.includes(Roles.ADMIN) && (
+              <TableCell>Компания</TableCell>
+            )}
             <TableCell>Email</TableCell>
             <TableCell>Группа</TableCell>
-            <TableCell>Права</TableCell>
+            {roles.includes(Roles.ADMIN) && (
+              <TableCell>Права</TableCell>
+            )}
             <TableCell>Дата приглашения</TableCell>
             <TableCell>Статус</TableCell>
           </TableRow>

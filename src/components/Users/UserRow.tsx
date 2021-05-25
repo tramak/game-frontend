@@ -13,8 +13,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import { IUser } from '../../redux/user/interfaces';
 import { useHistory } from 'react-router';
-import { useActions } from '../../redux/hooks';
+import { useActions, useAppSelector } from '../../redux/hooks';
 import { useConfirm } from 'material-ui-confirm';
+import { Roles } from '../../intefaces/role';
 
 interface IProps {
   user: IUser
@@ -24,6 +25,7 @@ const UserRow: React.FC<IProps> = ({ user }) => {
   const [ open, setOpen ] = React.useState(false);
   const classes = useRowStyles();
   const history = useHistory();
+  const roles = useAppSelector(state => state.auth.profile?.roles) || [];
   const { fetchUserDelete } = useActions();
   const confirm = useConfirm();
 
@@ -37,6 +39,7 @@ const UserRow: React.FC<IProps> = ({ user }) => {
       });
   }
 
+  const completed = !!user.status;
   return (
     <React.Fragment>
       <TableRow className={classes.root}>
@@ -48,12 +51,19 @@ const UserRow: React.FC<IProps> = ({ user }) => {
         <TableCell component="th" scope="row">
           {user.fio}
         </TableCell>
-        <TableCell>{user.company}</TableCell>
+        {roles.includes(Roles.ADMIN) && (
+          <TableCell>{user.company}</TableCell>
+        )}
         <TableCell>{user.email}</TableCell>
         <TableCell>{user.group}</TableCell>
-        <TableCell>{user.roles?.join(', ')}</TableCell>
+        {roles.includes(Roles.ADMIN) && (
+          <TableCell>{user.roles?.join(', ')}</TableCell>
+        )}
         <TableCell>{user.invitationAt}</TableCell>
-        <TableCell>{user.status}</TableCell>
+        <TableCell>
+          {completed && <Box className={classes.statusCompleted}>Пройдено</Box>}
+          {!completed && <Box className={classes.statusNoCompleted}>Не пройдено</Box>}
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
