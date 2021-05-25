@@ -1,10 +1,11 @@
-import { put, takeLatest, call } from 'redux-saga/effects';
+import { put, takeLatest, takeEvery, call } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import * as api from '../api';
 import * as actions from '../actions';
 import * as I from './interfaces';
 import * as CONST from './constants';
 import { history } from '../history';
+import { IFetchUsersXslAction } from './interfaces';
 
 function* fetchUsers() {
   try {
@@ -52,10 +53,20 @@ function* fetchUserDelete(action: I.IFetchUserDeleteAction) {
   } catch (e) {}
 }
 
+function* fetchUsersXsl(action: I.IFetchUsersXslAction) {
+  const { file } = action.payload;
+
+  try {
+    const response: AxiosResponse<I.IFetchUsersXslResponse> = yield call(api.fetchUsersXsl, { file });
+    console.log({ response });
+  } catch (e) {}
+}
+
 export default function* () {
   yield takeLatest(CONST.FETCH_USER_ADD, fetchUserAdd);
   yield takeLatest(CONST.FETCH_USER_EDIT, fetchUserEdit);
   yield takeLatest(CONST.FETCH_USER_DELETE, fetchUserDelete);
   yield takeLatest(CONST.FETCH_USERS, fetchUsers);
   yield takeLatest(CONST.FETCH_USER, fetchUser);
+  yield takeEvery(CONST.FETCH_USERS_XSL, fetchUsersXsl);
 }

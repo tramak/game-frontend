@@ -3,13 +3,18 @@ import axios from './axios';
 
 const timeout = 60000;
 
-const headers = {
+interface IHeaders {
+  [name: string]: string;
+}
+
+const headersDefault: IHeaders = {
   'Content-Type': 'application/json;charset=utf-8'
 };
 
 const agent = {
-  POST<T, R = any>(path: string, data?: T) {
-    return axios.post(`${path}`, data, { timeout, headers }) as Promise<AxiosResponse<R>>;
+  POST<T, R = any>(path: string, data?: T, headers?: IHeaders) {
+    const h = headers ? { ...headersDefault, ...headers } : headersDefault;
+    return axios.post(`${path}`, data, { timeout, headers: h }) as Promise<AxiosResponse<R>>;
   },
 
   PUT<T, R = any>(path: string, data?: T) {

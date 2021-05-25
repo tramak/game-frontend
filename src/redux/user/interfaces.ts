@@ -66,3 +66,13 @@ export interface IFetchUserAction {
   payload: string | number;
 }
 export type IFetchUserResponse = IResponse<IUser>;
+
+// FETCH USERS XSL
+export interface IFetchUsersXslPayload {
+  file: File
+}
+export interface IFetchUsersXslAction {
+  type: typeof CONST.FETCH_USERS_XSL,
+  payload: IFetchUsersXslPayload
+}
+export type IFetchUsersXslResponse = IResponse<unknown>;

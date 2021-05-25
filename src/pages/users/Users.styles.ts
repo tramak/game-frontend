@@ -4,7 +4,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     buttons: {
       display: 'flex',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      marginBottom: theme.spacing(5)
     },
     buttonsRight: {
       '& button': {
@@ -12,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
     button: {
-      marginBottom: theme.spacing(5),
+      // ,
     },
   }),
 );

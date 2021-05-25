@@ -1,7 +1,7 @@
 import * as I from '../user/interfaces';
 import { AxiosResponse } from 'axios';
 import agent from './agent';
-import { IFetchUserDeleteResponse } from '../user/interfaces';
+import { IFetchUserDeleteResponse, IFetchUsersXslPayload } from '../user/interfaces';
 
 export const fetchUsers = (): Promise<AxiosResponse<I.IFetchUsersResponse>> => {
   return agent.GET('/user/all');
@@ -22,3 +22,13 @@ export const fetchUserEdit = (id: number | string, data: I.IUserAddFormValues): 
 export const fetchUserDelete = (id: number | string): Promise<AxiosResponse<I.IFetchUserDeleteResponse>> => {
   return agent.DELETE(`/user/${id}`);
 };
+
+export const fetchUsersXsl = (payload: I.IFetchUsersXslPayload): Promise<AxiosResponse<I.IFetchUsersXslResponse>> => {
+  const { file } = payload;
+  const formData = new FormData();
+  formData.append('file', file);
+
+  return agent.POST('/user/import/xsl', formData, {
+    'Content-Type': 'multipart/form-data'
+  })
+}

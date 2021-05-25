@@ -7,10 +7,19 @@ import Users from '../../components/Users/Users';
 import useStyles from './Users.styles';
 import Box from '@material-ui/core/Box';
 import { useHistory } from 'react-router';
+import FileUpload from '../../components/form/FileUpload/FileUpload';
+import { useActions } from '../../redux/hooks';
+import { fetchUsersXsl } from '../../redux/user/actions';
 
 const UsersPage = () => {
   const classes = useStyles();
   const history = useHistory();
+  const { fetchUsersXsl } = useActions();
+
+  const handlerChangeFile = (file: File) => {
+    console.log({ file });
+    fetchUsersXsl(file);
+  }
 
   return (
     <div>
@@ -33,18 +42,19 @@ const UsersPage = () => {
             startIcon={<GetAppIcon />}
             onClick={() => alert('В разработке')}
           >
-            Скачать шаблон
+            Скачать шаблон XSL
           </Button>
 
-          <Button
-            variant="contained"
-            color="default"
-            className={classes.button}
-            startIcon={<CloudUploadIcon />}
-            onClick={() => alert('В разработке')}
-          >
-            Импорт
-          </Button>
+          <FileUpload setFile={handlerChangeFile} accept=".xlsx, .xls">
+            <Button
+              variant="contained"
+              color="default"
+              className={classes.button}
+              startIcon={<CloudUploadIcon />}
+            >
+              Импорт XSL
+            </Button>
+          </FileUpload>
         </Box>
       </Box>
       <Users />

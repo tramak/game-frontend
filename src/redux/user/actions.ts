@@ -27,3 +27,10 @@ export const fetchUserDelete = (id: number | string) => ({
   type: CONST.FETCH_USER_DELETE,
   payload: id
 });
+
+export const fetchUsersXsl = (file: File) => ({
+  type: CONST.FETCH_USERS_XSL,
+  payload: {
+    file
+  }
+});

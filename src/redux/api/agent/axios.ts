@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { API_URL } from './constants';
 import { history } from '../../history';
+import { store } from '../../store';
+import * as actions from '../../actions';
 
 const HTTP = axios.create({
   baseURL: `${API_URL}/api/`,
@@ -38,6 +40,7 @@ HTTP.interceptors.response.use(
     const status = error.response ? error.response.status : 408;
     if (status === 401) {
       delete localStorage.jwtToken;
+      store.dispatch(actions.clearToken());
       history.push('/singIn');
     }
     return Promise.reject(error);
