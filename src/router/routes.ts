@@ -59,4 +59,9 @@ export const routes: IRouter = [
     component: pages.Users,
     layout: MainLayout
   },
+  {
+    path: '/game/:token',
+    exact: true,
+    component: pages.GamePage
+  },
 ]

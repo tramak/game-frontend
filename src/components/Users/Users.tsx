@@ -36,6 +36,7 @@ const Users: React.FC = () => {
               <TableCell>Права</TableCell>
             )}
             <TableCell>Дата приглашения</TableCell>
+            <TableCell>url</TableCell>
             <TableCell>Статус</TableCell>
           </TableRow>
         </TableHead>

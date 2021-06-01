@@ -21,6 +21,7 @@ export interface IUser {
   group?: string;
   invitationAt: string;
   status: number;
+  token?: string;
 }
 
 export type IUsers = Array<IUser>;

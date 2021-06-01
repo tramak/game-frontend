@@ -12,10 +12,11 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import { IUser } from '../../redux/user/interfaces';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { useActions, useAppSelector } from '../../redux/hooks';
 import { useConfirm } from 'material-ui-confirm';
 import { Roles } from '../../intefaces/role';
+import { Link } from '@material-ui/core';
 
 interface IProps {
   user: IUser
@@ -61,12 +62,17 @@ const UserRow: React.FC<IProps> = ({ user }) => {
         )}
         <TableCell>{user.invitationAt}</TableCell>
         <TableCell>
+          {user.token ? (
+            <Link href={`${window.location.origin}/game/${user.token}`}>ссылка</Link>
+          ): (<Box>123</Box>)}
+        </TableCell>
+        <TableCell>
           {completed && <Box className={classes.statusCompleted}>Пройдено</Box>}
           {!completed && <Box className={classes.statusNoCompleted}>Не пройдено</Box>}
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={roles.includes(Roles.ADMIN) ? 9 : 7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Button
