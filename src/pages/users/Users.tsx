@@ -40,7 +40,7 @@ const UsersPage = () => {
             color="default"
             className={classes.button}
             startIcon={<GetAppIcon />}
-            onClick={() => alert('В разработке')}
+            onClick={() => window.location.href='/template.xlsx'}
           >
             Скачать шаблон XSL
           </Button>
