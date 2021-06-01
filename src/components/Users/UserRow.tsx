@@ -62,9 +62,9 @@ const UserRow: React.FC<IProps> = ({ user }) => {
         )}
         <TableCell>{user.invitationAt}</TableCell>
         <TableCell>
-          {user.token ? (
+          {user.token && (
             <Link href={`${window.location.origin}/game/${user.token}`}>ссылка</Link>
-          ): (<Box>123</Box>)}
+          )}
         </TableCell>
         <TableCell>
           {completed && <Box className={classes.statusCompleted}>Пройдено</Box>}

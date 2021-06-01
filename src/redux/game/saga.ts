@@ -11,14 +11,13 @@ function* fetchGame(action: I.IFetchGameAction) {
   try {
     const response: AxiosResponse<I.IFetchGameResponse> = yield call(api.fetchGame, token);
     const { body } = response.data as I.IFetchGameSuccess;
-    const data = JSON.parse(body);
 
-    if (data.Error) {
+    if (body.error) {
       alert('Что-то пошло не так, запустить игру не получилось')
     }
 
-    if (data.Message) {
-      window.location.href = data.Message;
+    if (body.url) {
+      window.location.href = body.url;
     }
   } catch (e) {}
 }

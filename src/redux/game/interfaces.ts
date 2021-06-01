@@ -8,7 +8,10 @@ export interface IFetchGameAction {
 
 export interface IFetchGameSuccess {
   statusCode: number;
-  body: string;
+  body: {
+    url?: string;
+    error?: string;
+  };
   headers: {
     [name: string]: string;
   }
