@@ -17,9 +17,7 @@ const UsersPage = () => {
   const { fetchUsersXsl } = useActions();
 
   const handlerChangeFile = (file: File) => {
-    console.log({ file });
-    window.alert('В разработке');
-    // fetchUsersXsl(file);
+    fetchUsersXsl(file);
   }
 
   return (
