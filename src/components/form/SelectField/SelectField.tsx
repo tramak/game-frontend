@@ -24,7 +24,7 @@ const SelectField: React.FC<IProps> = (
 
   return (
     <FormControl className={classes.formControl}>
-      <InputLabel htmlFor={labelId}>{label}</InputLabel>
+      <InputLabel htmlFor={labelId} shrink={true}>{label}</InputLabel>
       <Select
         native
         value={input.value}
@@ -34,6 +34,7 @@ const SelectField: React.FC<IProps> = (
           name: input.name,
           id: labelId,
         }}
+        label={label}
       >
         {(options || []).map(item => (
           <option key={item.value} value={item.value.toString()}>{item.label}</option>
