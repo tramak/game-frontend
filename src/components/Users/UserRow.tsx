@@ -95,12 +95,12 @@ const UserRow: React.FC<IProps> = ({ user }) => {
                 Удалить
               </Button>
             </Box>
-            <Box margin={2}>
-              <Typography variant="h6" gutterBottom component="div">
-                История
-              </Typography>
-              <div>В разработке...</div>
-            </Box>
+            {/*<Box margin={2}>*/}
+            {/*  <Typography variant="h6" gutterBottom component="div">*/}
+            {/*    История*/}
+            {/*  </Typography>*/}
+            {/*  <div>В разработке...</div>*/}
+            {/*</Box>*/}
           </Collapse>
         </TableCell>
       </TableRow>

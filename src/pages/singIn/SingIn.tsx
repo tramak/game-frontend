@@ -49,7 +49,7 @@ const SignIn = () => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box className={classes.paper}>
-        <img src="/tactise_black_logo.png" alt="Tactise" width={252} height={60} />
+        <img src="/logo.png" alt="Tactise" width={252} height={60} />
         <Form
           initialValues={{ email: '', password: '' }}
           onSubmit={onSubmit}
