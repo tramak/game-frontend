@@ -24,7 +24,7 @@ export interface ISingInFormValues {
   password: string;
 }
 
-export interface IFetchSingInAction extends PromisifiedMetaAction<any, IErrors> {
+export interface IFetchSingInAction extends PromisifiedMetaAction<ISingInFormResponseSuccess, IErrors> {
   type: typeof CONST.FETCH_SING_IN,
   payload: ISingInFormValues,
 }

@@ -6,6 +6,7 @@ import * as I from './interfaces';
 import * as CONST from './constants';
 import { history } from '../history';
 import { IFetchUsersXslAction } from './interfaces';
+import { requestC } from '../utils/request';
 
 function* fetchUsers() {
   try {
@@ -29,7 +30,7 @@ function* fetchUserAdd(action: I.IFetchUserAddAction) {
   const { payload } = action;
 
   try {
-    const response: AxiosResponse<I.IFetchUserAddResponse> = yield call(api.fetchUserAdd, payload);
+    const response: AxiosResponse<I.IFetchUserAddResponse> = yield requestC([ api.fetchUserAdd, action ], payload);
     history.push('/users');
   } catch(e) {}
 }
@@ -39,7 +40,8 @@ function* fetchUserEdit(action: I.IFetchUserEditAction) {
   const { id, data } = payload;
 
   try {
-    const response: AxiosResponse<I.IFetchUserEditResponse> = yield call(api.fetchUserEdit, id, data);
+    const response: AxiosResponse<I.IFetchUserEditResponse> = yield requestC([ api.fetchUserEdit, action ], id, data);
+    // const response: AxiosResponse<I.IFetchUserEditResponse> = yield call(api.fetchUserEdit, id, data);
     history.push('/users');
   } catch (e) {}
 }

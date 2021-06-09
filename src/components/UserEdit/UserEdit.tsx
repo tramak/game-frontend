@@ -7,6 +7,7 @@ import { Roles } from '../../intefaces/role';
 import { generate } from 'generate-password';
 import UserEditContent from './UserEditContent';
 import { useActions, useAppSelector } from '../../redux/hooks';
+import { getFieldErrors } from '../../utils/getFieldErrors';
 
 const getPassword = () => {
   return generate({
@@ -27,12 +28,25 @@ const UserEdit: React.FC<IProps> = ({ id }) => {
   const roles = useAppSelector(state => state.auth.profile?.roles) || [];
   const userActive = useAppSelector(state => state.user.userActive);
 
-  const onSubmit = (values: IUserAddFormValues) => {
-    if (id) {
-      fetchUserEdit(id, values);
-    } else {
-      fetchUserAdd(values);
-    }
+  const send = (values: IUserAddFormValues) => {
+    return new Promise((resolve) => {
+      const meta = {
+        promiseActions: {
+          resolve: () => resolve(false),
+          reject: (data: any) => resolve(getFieldErrors(data?.errors))
+        }
+      }
+
+      if (id) {
+        fetchUserEdit(id, values, meta);
+      } else {
+        fetchUserAdd(values, meta);
+      }
+    });
+  }
+
+  const onSubmit = async (values: IUserAddFormValues) => {
+    return await send(values);
   }
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { IResponse } from '../../intefaces';
+import { IErrors, IResponse, PromisifiedMeta, PromisifiedMetaAction } from '../../intefaces';
 import { Roles } from '../../intefaces/role';
 import * as CONST from './constants';
 
@@ -32,21 +32,25 @@ export interface IUserState {
 }
 
 // Add User
-export interface IFetchUserAddAction {
+export interface IFetchUserAddAction extends PromisifiedMetaAction<IUser, IErrors> {
   type: typeof CONST.FETCH_USER_ADD,
   payload: IUserAddFormValues
 }
 
+export type IFetchUserAddMeta = PromisifiedMeta<IUser, IErrors>;
+
 export type IFetchUserAddResponse = IResponse<IUser>;
 
 // Edit User
-export interface IFetchUserEditAction {
+export interface IFetchUserEditAction extends PromisifiedMetaAction<IUser, IErrors> {
   type: typeof CONST.FETCH_USER_EDIT,
   payload: {
     id: number | string;
     data: IUserAddFormValues;
   }
 }
+
+export type IFetchUserEditMeta = PromisifiedMeta<IUser, IErrors>;
 
 export type IFetchUserEditResponse = IResponse<IUser>;
 

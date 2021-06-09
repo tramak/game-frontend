@@ -5,7 +5,7 @@ import * as I from './interfaces';
 import * as api from '../api';
 import * as CONST from './constants';
 import { history } from '../history';
-import { request, requestC } from '../utils/request';
+import { requestC } from '../utils/request';
 
 function* fetchSingIn(action: I.IFetchSingInAction) {
   const { payload } = action;

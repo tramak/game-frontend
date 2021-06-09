@@ -10,7 +10,7 @@ export interface IError {
 export type IErrors = Array<IError>;
 
 export interface IResponseError {
-  code: string;
+  statusCode: number;
   errors: IErrors
 }
 
@@ -21,10 +21,12 @@ export interface PromiseCallbacks<T, E> {
   reject: (v: E) => Promise<E> | void,
 }
 
+export interface PromisifiedMeta<T, E> {
+  promiseActions: PromiseCallbacks<T, E>
+}
+
 export interface PromisifiedMetaAction<T, E> {
-  meta: {
-    promiseActions: PromiseCallbacks<T, E>
-  }
+  meta: PromisifiedMeta<T, E>
 }
 
 export interface Action<P> {
