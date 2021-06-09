@@ -67,7 +67,7 @@ const UserRow: React.FC<IProps> = ({ user }) => {
           )}
         </TableCell>
         <TableCell>
-          {completed && <Box className={classes.statusCompleted}>Пройдено</Box>}
+          {completed && <Box className={classes.statusCompleted}>{user.status}%</Box>}
           {!completed && <Box className={classes.statusNoCompleted}>Не пройдено</Box>}
         </TableCell>
       </TableRow>
