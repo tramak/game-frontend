@@ -7,6 +7,7 @@ export interface ICompany {
   name: string;
   url?: string;
   description?: string;
+  countUsers: number;
 }
 
 export type ICompanies = Array<ICompany>;

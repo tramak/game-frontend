@@ -21,6 +21,7 @@ const Companies: React.FC = () => {
             <TableCell>Название</TableCell>
             <TableCell>Email</TableCell>
             <TableCell>Url</TableCell>
+            <TableCell>Сотрудников</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

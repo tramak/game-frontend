@@ -50,6 +50,7 @@ const UserRow: React.FC<IProps> = ({ row }) => {
         </TableCell>
         <TableCell>{row.email}</TableCell>
         <TableCell>{row.url}</TableCell>
+        <TableCell>{row.countUsers}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>

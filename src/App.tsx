@@ -10,6 +10,10 @@ const App: React.FC = () => {
   const token = useAppSelector(state => state.auth.token);
   const roles = useAppSelector(state => state.auth.profile?.roles) || [];
 
+  if (roles.length === 0) {
+    return <div>Загрузка...</div>
+  }
+
   return (
     <Router history={history}>
       <Switch>
