@@ -42,12 +42,7 @@ const CompanyEdit: React.FC<IProps> = ({ id }) => {
     return null;
   }
 
-  const initialValues = {
-    name: company?.name || '',
-    email: company?.email || '',
-    url: company?.url || '',
-    description: company?.description || '',
-  }
+  const initialValues = company;
 
   return (
     <Form
@@ -82,6 +77,22 @@ const CompanyEdit: React.FC<IProps> = ({ id }) => {
                   required
                   label="Url (http://)"
                   name="url"
+                  component={InputTextField}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  required
+                  label="Fleet AWS"
+                  name="fleet"
+                  component={InputTextField}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  required
+                  label="Stack AWS"
+                  name="stack"
                   component={InputTextField}
                 />
               </Grid>
